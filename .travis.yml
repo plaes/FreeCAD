@@ -45,17 +45,33 @@ matrix:
 
       - os: linux
         dist: trusty
+        addons:
+          apt:
+            sources:
+              - ubuntu-toolchain-r-test
+            packages:
+              - g++-4.9
         compiler: gcc
         env:
           - CMAKE_OPTS="-DBUILD_FEM_NETGEN=ON"
           - PYTHON_MAJOR_VERSION=2
+          - CC=gcc-4.9
+          - CXX=g++-4.9
 
       - os: linux
         dist: trusty
+        addons:
+          apt:
+            sources:
+              - ubuntu-toolchain-r-test
+            packages:
+              - g++-4.9
         compiler: gcc
         env:
           - CMAKE_OPTS="-DBUILD_FEM_NETGEN=ON"
           - PYTHON_MAJOR_VERSION=3
+          - CC=gcc-4.9
+          - CXX=g++-4.9
 
       - os: osx
         osx_image: xcode7.3
@@ -83,7 +99,8 @@ before_install:
 
    "linux")
        sudo apt-get update -qq
-       sudo apt-get install -y doxygen                          \
+       sudo apt-get install -y --no-install-recommends          \
+                               doxygen                          \
                                libboost1.55-dev                 \
                                libboost-filesystem1.55-dev      \
                                libboost-program-options1.55-dev \
